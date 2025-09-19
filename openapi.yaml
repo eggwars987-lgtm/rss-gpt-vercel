@@ -1,0 +1,51 @@
+openapi: 3.1.0
+info:
+  title: RSS News Insight Runner
+  version: 0.1.0
+servers:
+  - url: https://YOUR_VERCEL_URL
+paths:
+  /run:
+    post:
+      summary: Run RSS→Summary→Essay pipeline
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                limit_per_feed:
+                  type: integer
+                  default: 12
+                essay_max_chars:
+                  type: integer
+                  default: 200
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generated_at: { type: string }
+                  clusters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        topic: { type: string }
+                        key_points: { type: array, items: { type: string } }
+                        insights:
+                          type: object
+                          properties:
+                            so_what: { type: array, items: { type: string } }
+                            watchlist: { type: array, items: { type: string } }
+                        sources: { type: array, items: { type: string } }
+                  essays:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text: { type: string }
