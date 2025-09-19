@@ -1,9 +1,5 @@
 {
   "functions": {
-    "api/**/*.py": { "runtime": "python3.11" }
-  },
-  "routes": [
-    { "src": "/openapi.yaml", "dest": "/openapi.yaml" },
-    { "src": "/(.*)", "dest": "/api/index.py" }
-  ]
+    "api/**/*.py": { "runtime": "@vercel/python@3.11" }
+  }
 }
