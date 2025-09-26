@@ -11,7 +11,7 @@ class RunReq(BaseModel):
 
 @app.get("/")
 def root():
-    # 루트 헬스(지금 OK가 뜨는 곳)
+    # 루트 OK 확인용
     return {"status": "ok", "hint": "GET /api/app/health, POST /api/app/run"}
 
 @app.get("/health")
@@ -20,7 +20,6 @@ def health():
 
 @app.post("/run")
 def run(req: RunReq):
-    # 실제 RSS 파이프라인은 나중에 붙이고, 일단 형식만 맞춰 더미 응답
     now_kst = (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d %H:%M KST")
     return {
         "generated_at": now_kst,
